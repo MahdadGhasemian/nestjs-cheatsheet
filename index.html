@@ -79,67 +79,7 @@
         line-height: 1.8;
       }
 
-      .example {
-        background: #2d2d2d;
-        padding: 1rem;
-        border-radius: 8px;
-        font-family: 'Fira Code', monospace;
-        white-space: pre-wrap;
-        margin-top: 1rem;
-        border-left: 4px solid #3498db;
-        position: relative;
-        overflow: auto;
-      }
-
-      .example::before {
-        content: 'Example';
-        position: absolute;
-        top: -12px;
-        left: 12px;
-        background: #3498db;
-        color: white;
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 0.75rem;
-        font-weight: 500;
-      }
-
-      .example code {
-        color: #abb2bf;
-        font-weight: 400;
-        display: block;
-        line-height: 1.6;
-      }
-
-      .example code::before {
-        content: '»';
-        margin-left: 0.5rem;
-        color: #56b6c2;
-      }
-
-      .example .decorator {
-        color: #c678dd;
-      }
-
-      .example .string {
-        color: #98c379;
-      }
-
-      .example .keyword {
-        color: #c678dd;
-      }
-
-      .example .type {
-        color: #e06c75;
-      }
-
-      .example .function {
-        color: #61afef;
-      }
-
-      .example .comment {
-        color: #5c6370;
-      }
+     
 
       .tip {
         background: #f5f8fa;
@@ -173,9 +113,11 @@
         margin-bottom: 0.5rem;
       }
 
-      .example code {
-        color: #3498db;
-        font-weight: 500;
+      .code-block {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        white-space: pre-line;
       }
 
       @media (max-width: 768px) {
@@ -201,11 +143,13 @@
         <div class="description">
           Handle incoming requests and return responses. Controllers are the main entry point for handling HTTP requests.
         </div>
-        <div class="example">
-          <code class="decorator">@Controller</code><code class="string">('users')</code><br>
-          <code class="decorator">@Get()</code><code class="function">findAll</code>() {}<br>
-          <code class="decorator">@Post()</code><code class="function">create</code>(<code class="keyword">@Body()</code> <code class="type">user</code>: <code class="type">UserDto</code>) {}
-        </div>
+          <pre class="code-block">
+            @Controller('users')
+            @Get()
+            findAll(): Promise<User[]> {}
+            @Post()
+            create(@Body() user: UserDto): Promise<User> {}
+          </pre> 
         <div class="tip">
           Controllers must be decorated with <code>@Controller()</code> and can use route decorators like <code>@Get()</code>, <code>@Post()</code>
         </div>
@@ -219,12 +163,12 @@
         <div class="description">
           Handle business logic and data operations. Services are injectable classes that provide specific functionality.
         </div>
-        <div class="example">
-          <code>@Injectable()</code><br>
-          <code>export class UsersService {</code><br>
-          <code>  findAll(): Promise<User[]> {}</code><br>
-          <code>}</code>
-        </div>
+        <pre class="code-block">
+          @Injectable()
+          export class UsersService {
+            findAll(): Promise<User[]> {}
+          }
+        </pre>
         <div class="note">
           Services must be decorated with <code>@Injectable()</code> to be injectable into other classes
         </div>
@@ -238,12 +182,12 @@
         <div class="description">
           Organize related components and dependencies. Modules group related functionality and manage dependencies.
         </div>
-        <div class="example">
-          <code>@Module({</code><br>
-          <code>  controllers: [UsersController],</code><br>
-          <code>  providers: [UsersService]</code><br>
-          <code>})</code>
-        </div>
+        <pre class="code-block">
+          @Module({
+            controllers: [UsersController],
+            providers: [UsersService]
+          })
+        </pre>
         <div class="tip">
           Modules are the basic building blocks of NestJS applications and help organize code into logical units
         </div>
@@ -257,12 +201,12 @@
         <div class="description">
           Add metadata and behavior to classes and methods. Decorators are used to modify or enhance classes and methods.
         </div>
-        <div class="example">
-          <code>@Controller()</code><br>
-          <code>@Get()</code><br>
-          <code>@Post()</code><br>
-          <code>@Injectable()</code>
-        </div>
+        <pre class="code-block">
+          @Controller()
+          @Get()
+          @Post()
+          @Injectable()
+        </pre>
         <div class="note">
           Decorators are a key feature of TypeScript that NestJS heavily relies on for its functionality
         </div>
@@ -276,10 +220,10 @@
         <div class="description">
           Process requests before they reach route handlers. Similar to Express middleware, but with NestJS features.
         </div>
-        <div class="example">
-          <code>app.use(loggerMiddleware);</code><br>
-          <code>app.use('/api', authMiddleware);</code>
-        </div>
+        <pre class="code-block">
+          app.use(loggerMiddleware);
+          app.use('/api', authMiddleware);
+        </pre>
         <div class="tip">
           Middleware can be used to log requests, authenticate users, or modify request/response objects
         </div>
@@ -293,10 +237,10 @@
         <div class="description">
           Process requests and responses. Interceptors can modify incoming requests or outgoing responses.
         </div>
-        <div class="example">
-          <code>@UseInterceptors(LoggingInterceptor)</code><br>
-          <code>@UseInterceptors(TransformInterceptor)</code>
-        </div>
+        <pre class="code-block">
+          @UseInterceptors(LoggingInterceptor)
+          @UseInterceptors(TransformInterceptor)
+        </pre>
         <div class="note">
           Interceptors are more powerful than middleware as they have access to both request and response objects
         </div>
@@ -310,9 +254,9 @@
         <div class="description">
           Transform and validate input data. Pipes ensure that incoming data conforms to expected formats.
         </div>
-        <div class="example">
-          <code>@Body(new ValidationPipe()) dto: CreateUserDto</code>
-        </div>
+        <pre class="code-block">
+          @Body(new ValidationPipe()) dto: CreateUserDto
+        </pre>
         <div class="tip">
           Pipes are great for data validation and transformation before it reaches your business logic
         </div>
@@ -326,10 +270,10 @@
         <div class="description">
           Control access to routes and methods. Guards implement the authorization logic in your application.
         </div>
-        <div class="example">
-          <code>@UseGuards(AuthGuard)</code><br>
-          <code>@UseGuards(RolesGuard)</code>
-        </div>
+        <pre>
+          @UseGuards(AuthGuard)
+          @UseGuards(RolesGuard)
+        </pre>
         <div class="note">
           Guards are used to protect routes and methods based on user roles or permissions
         </div>
@@ -343,10 +287,10 @@
         <div class="description">
           Handle exceptions globally. Exception filters catch and process errors that occur during request processing.
         </div>
-        <div class="example">
-          <code>@Catch(HttpException)</code><br>
-          <code>handleException(exception: HttpException) {}</code>
-        </div>
+        <pre class="code-block">
+          @Catch(HttpException)
+          handleException(exception: HttpException) {}
+        </pre>
         <div class="tip">
           Exception filters help maintain consistent error handling across your application
         </div>
@@ -360,11 +304,10 @@
         <div class="description">
           Handle events and notifications. Events allow components to communicate asynchronously.
         </div>
-        <div class="example">
-          <code>@EventEmitter()</code><br>
-          <code>emit('user.created', user)</code><br>
-          <code>@OnEvent('user.created')</code>
-        </div>
+        <pre class="code-block">
+          @EventEmitter()
+          emit('user.created', user)
+        </pre>
         <div class="note">
           Events are great for implementing publish-subscribe patterns in your application
         </div>
