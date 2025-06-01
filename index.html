@@ -3,186 +3,199 @@
   <head>
     <meta charset="UTF-8" />
     <title>NestJS Cheatsheet</title>
-    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap');
+    </style>
   </head>
   <body>
-    <h1>NestJS Cheatsheet</h1>
+    <h1 class="text-4xl font-bold text-center text-blue-600 mb-8 bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">NestJS Cheatsheet</h1>
 
-    <div class="container">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Controllers -->
-      <div class="card">
-        <div class="icon">🛠️</div>
-        <div class="title">Controllers</div>
-        <div class="badge">Core</div>
-        <div class="description">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+        <div class="text-4xl text-blue-600 mb-4">🛠️</div>
+        <div class="text-blue-600 font-semibold text-xl mb-2">Controllers</div>
+        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Core</div>
+        <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Handle incoming requests and return responses. Controllers are the main entry point for handling HTTP requests.
         </div>
-          <pre class="code-block">
-            @Controller('users')
-            @Get()
-            findAll(): Promise<User[]> {}
-            @Post()
-            create(@Body() user: UserDto): Promise<User> {}
-          </pre> 
-        <div class="tip">
-          Controllers must be decorated with <code>@Controller()</code> and can use route decorators like <code>@Get()</code>, <code>@Post()</code>
+        <pre class="whitespace-pre-line">
+          @Controller('users')
+          @Get()
+          findAll(): Promise<User[]> {}
+          @Post()
+          create(@Body() user: UserDto): Promise<User> {}
+        </pre>
+        <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
+          <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
+          Controllers must be decorated with <code class="text-blue-600">@Controller()</code> and can use route decorators like <code class="text-blue-600">@Get()</code>, <code class="text-blue-600">@Post()</code>
         </div>
       </div>
 
       <!-- Services -->
-      <div class="card">
-        <div class="icon">⚙️</div>
-        <div class="title">Services</div>
-        <div class="badge">Core</div>
-        <div class="description">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+        <div class="text-4xl text-blue-600 mb-4">⚙️</div>
+        <div class="text-blue-600 font-semibold text-xl mb-2">Services</div>
+        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Core</div>
+        <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Handle business logic and data operations. Services are injectable classes that provide specific functionality.
         </div>
-        <pre class="code-block">
+        <pre class="whitespace-pre-line">
           @Injectable()
           export class UsersService {
             findAll(): Promise<User[]> {}
           }
         </pre>
-        <div class="note">
-          Services must be decorated with <code>@Injectable()</code> to be injectable into other classes
+        <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
+          <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
+          Services must be decorated with <code class="text-red-600">@Injectable()</code> to be injectable into other classes
         </div>
       </div>
 
       <!-- Modules -->
-      <div class="card">
-        <div class="icon">📦</div>
-        <div class="title">Modules</div>
-        <div class="badge">Core</div>
-        <div class="description">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+        <div class="text-4xl text-blue-600 mb-4">📦</div>
+        <div class="text-blue-600 font-semibold text-xl mb-2">Modules</div>
+        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Core</div>
+        <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Organize related components and dependencies. Modules group related functionality and manage dependencies.
         </div>
-        <pre class="code-block">
+        <pre class="whitespace-pre-line">
           @Module({
             controllers: [UsersController],
             providers: [UsersService]
           })
         </pre>
-        <div class="tip">
+        <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
+          <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
           Modules are the basic building blocks of NestJS applications and help organize code into logical units
         </div>
       </div>
 
       <!-- Decorators -->
-      <div class="card">
-        <div class="icon">🏷️</div>
-        <div class="title">Decorators</div>
-        <div class="badge">Core</div>
-        <div class="description">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+        <div class="text-4xl text-blue-600 mb-4">🏷️</div>
+        <div class="text-blue-600 font-semibold text-xl mb-2">Decorators</div>
+        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Core</div>
+        <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Add metadata and behavior to classes and methods. Decorators are used to modify or enhance classes and methods.
         </div>
-        <pre class="code-block">
+        <pre class="whitespace-pre-line">
           @Controller()
           @Get()
           @Post()
           @Injectable()
         </pre>
-        <div class="note">
+        <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
+          <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
           Decorators are a key feature of TypeScript that NestJS heavily relies on for its functionality
         </div>
       </div>
 
       <!-- Middleware -->
-      <div class="card">
-        <div class="icon">🛡️</div>
-        <div class="title">Middleware</div>
-        <div class="badge">HTTP</div>
-        <div class="description">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+        <div class="text-4xl text-blue-600 mb-4">🛡️</div>
+        <div class="text-blue-600 font-semibold text-xl mb-2">Middleware</div>
+        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">HTTP</div>
+        <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Process requests before they reach route handlers. Similar to Express middleware, but with NestJS features.
         </div>
-        <pre class="code-block">
+        <pre class="whitespace-pre-line">
           app.use(loggerMiddleware);
           app.use('/api', authMiddleware);
         </pre>
-        <div class="tip">
+        <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
+          <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
           Middleware can be used to log requests, authenticate users, or modify request/response objects
         </div>
       </div>
 
       <!-- Interceptors -->
-      <div class="card">
-        <div class="icon">🔄</div>
-        <div class="title">Interceptors</div>
-        <div class="badge">HTTP</div>
-        <div class="description">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+        <div class="text-4xl text-blue-600 mb-4">🔄</div>
+        <div class="text-blue-600 font-semibold text-xl mb-2">Interceptors</div>
+        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">HTTP</div>
+        <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Process requests and responses. Interceptors can modify incoming requests or outgoing responses.
         </div>
-        <pre class="code-block">
+        <pre class="whitespace-pre-line">
           @UseInterceptors(LoggingInterceptor)
           @UseInterceptors(TransformInterceptor)
         </pre>
-        <div class="note">
+        <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
+          <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
           Interceptors are more powerful than middleware as they have access to both request and response objects
         </div>
       </div>
 
       <!-- Pipes -->
-      <div class="card">
-        <div class="icon">🔄</div>
-        <div class="title">Pipes</div>
-        <div class="badge">Validation</div>
-        <div class="description">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+        <div class="text-4xl text-blue-600 mb-4">🔄</div>
+        <div class="text-blue-600 font-semibold text-xl mb-2">Pipes</div>
+        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Validation</div>
+        <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Transform and validate input data. Pipes ensure that incoming data conforms to expected formats.
         </div>
-        <pre class="code-block">
+        <pre class="whitespace-pre-line">
           @Body(new ValidationPipe()) dto: CreateUserDto
         </pre>
-        <div class="tip">
+        <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
+          <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
           Pipes are great for data validation and transformation before it reaches your business logic
         </div>
       </div>
 
       <!-- Guards -->
-      <div class="card">
-        <div class="icon">🔒</div>
-        <div class="title">Guards</div>
-        <div class="badge">Security</div>
-        <div class="description">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+        <div class="text-4xl text-blue-600 mb-4">🔒</div>
+        <div class="text-blue-600 font-semibold text-xl mb-2">Guards</div>
+        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Security</div>
+        <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Control access to routes and methods. Guards implement the authorization logic in your application.
         </div>
-        <pre>
+        <pre class="whitespace-pre-line">
           @UseGuards(AuthGuard)
           @UseGuards(RolesGuard)
         </pre>
-        <div class="note">
+        <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
+          <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
           Guards are used to protect routes and methods based on user roles or permissions
         </div>
       </div>
 
       <!-- Exception Filters -->
-      <div class="card">
-        <div class="icon">🚨</div>
-        <div class="title">Exception Filters</div>
-        <div class="badge">Error Handling</div>
-        <div class="description">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+        <div class="text-4xl text-blue-600 mb-4">❌</div>
+        <div class="text-blue-600 font-semibold text-xl mb-2">Exception Filters</div>
+        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Error Handling</div>
+        <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Handle exceptions globally. Exception filters catch and process errors that occur during request processing.
         </div>
-        <pre class="code-block">
+        <pre class="whitespace-pre-line">
           @Catch(HttpException)
           handleException(exception: HttpException) {}
         </pre>
-        <div class="tip">
+        <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
+          <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
           Exception filters help maintain consistent error handling across your application
         </div>
       </div>
 
       <!-- Events -->
-      <div class="card">
-        <div class="icon">⚡</div>
-        <div class="title">Events</div>
-        <div class="badge">Async</div>
-        <div class="description">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+        <div class="text-4xl text-blue-600 mb-4">⚡</div>
+        <div class="text-blue-600 font-semibold text-xl mb-2">Events</div>
+        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Async</div>
+        <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Handle events and notifications. Events allow components to communicate asynchronously.
         </div>
-        <pre class="code-block">
+        <pre class="whitespace-pre-line">
           @EventEmitter()
           emit('user.created', user)
         </pre>
-        <div class="note">
+        <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
+          <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
           Events are great for implementing publish-subscribe patterns in your application
         </div>
       </div>
