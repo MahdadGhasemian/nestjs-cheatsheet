@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>NestJS Concepts Overview</title>
+    <title>NestJS Cheatsheet</title>
     <style>
       body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -24,18 +24,42 @@
         -webkit-text-fill-color: transparent;
       }
 
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        padding: 1rem;
+      }
+
       .card {
         background: white;
         border-radius: 12px;
         padding: 2rem;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        margin: 1rem 0;
         transition: transform 0.3s ease-in-out;
+        position: relative;
+        overflow: hidden;
       }
 
       .card:hover {
         transform: translateY(-5px);
         box-shadow: 0 8px 12px -4px rgba(0, 0, 0, 0.05);
+      }
+
+      .icon {
+        font-size: 2.5rem;
+        color: #3498db;
+        margin-bottom: 1rem;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: #3498db;
+        color: white;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin-right: 0.5rem;
       }
 
       .title {
@@ -45,6 +69,7 @@
         margin-bottom: 1rem;
         border-bottom: 3px solid #3498db;
         padding-bottom: 0.5rem;
+        position: relative;
       }
 
       .description {
@@ -55,15 +80,97 @@
       }
 
       .example {
-        background: #f5f8fa;
+        background: #2d2d2d;
         padding: 1rem;
         border-radius: 8px;
         font-family: 'Fira Code', monospace;
         white-space: pre-wrap;
         margin-top: 1rem;
         border-left: 4px solid #3498db;
-        font-size: 0.9rem;
+        position: relative;
+        overflow: auto;
+      }
+
+      .example::before {
+        content: 'Example';
+        position: absolute;
+        top: -12px;
+        left: 12px;
+        background: #3498db;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      .example code {
+        color: #abb2bf;
+        font-weight: 400;
+        display: block;
         line-height: 1.6;
+      }
+
+      .example code::before {
+        content: '»';
+        margin-left: 0.5rem;
+        color: #56b6c2;
+      }
+
+      .example .decorator {
+        color: #c678dd;
+      }
+
+      .example .string {
+        color: #98c379;
+      }
+
+      .example .keyword {
+        color: #c678dd;
+      }
+
+      .example .type {
+        color: #e06c75;
+      }
+
+      .example .function {
+        color: #61afef;
+      }
+
+      .example .comment {
+        color: #5c6370;
+      }
+
+      .tip {
+        background: #f5f8fa;
+        border-left: 4px solid #3498db;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+      }
+
+      .tip::before {
+        content: '💡 Tip';
+        display: block;
+        color: #3498db;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+
+      .note {
+        background: #fff;
+        border-left: 4px solid #e74c3c;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0 4px 4px 0;
+      }
+
+      .note::before {
+        content: '⚠️ Note';
+        display: block;
+        color: #e74c3c;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
       }
 
       .example code {
@@ -83,51 +190,185 @@
     </style>
   </head>
   <body>
-    <h1>NestJS Concepts Overview</h1>
+    <h1>NestJS Cheatsheet</h1>
 
-    <div class="card">
-      <div class="title">1. Decorators</div>
-      <p>Metadata annotations for classes and methods.</p>
-      <div class="example">
-        @Controller()<br />
-        @Get(), @Post()
+    <div class="container">
+      <!-- Controllers -->
+      <div class="card">
+        <div class="icon">🛠️</div>
+        <div class="title">Controllers</div>
+        <div class="badge">Core</div>
+        <div class="description">
+          Handle incoming requests and return responses. Controllers are the main entry point for handling HTTP requests.
+        </div>
+        <div class="example">
+          <code class="decorator">@Controller</code><code class="string">('users')</code><br>
+          <code class="decorator">@Get()</code><code class="function">findAll</code>() {}<br>
+          <code class="decorator">@Post()</code><code class="function">create</code>(<code class="keyword">@Body()</code> <code class="type">user</code>: <code class="type">UserDto</code>) {}
+        </div>
+        <div class="tip">
+          Controllers must be decorated with <code>@Controller()</code> and can use route decorators like <code>@Get()</code>, <code>@Post()</code>
+        </div>
       </div>
-    </div>
 
-    <div class="card">
-      <div class="title">2. Middleware</div>
-      <p>Run before route handlers (like Express middleware).</p>
-      <div class="example">app.use(loggerMiddleware);</div>
-    </div>
+      <!-- Services -->
+      <div class="card">
+        <div class="icon">⚙️</div>
+        <div class="title">Services</div>
+        <div class="badge">Core</div>
+        <div class="description">
+          Handle business logic and data operations. Services are injectable classes that provide specific functionality.
+        </div>
+        <div class="example">
+          <code>@Injectable()</code><br>
+          <code>export class UsersService {</code><br>
+          <code>  findAll(): Promise<User[]> {}</code><br>
+          <code>}</code>
+        </div>
+        <div class="note">
+          Services must be decorated with <code>@Injectable()</code> to be injectable into other classes
+        </div>
+      </div>
 
-    <div class="card">
-      <div class="title">3. Interceptors</div>
-      <p>Logic before/after request processing.</p>
-      <div class="example">@UseInterceptors(LoggingInterceptor)</div>
-    </div>
+      <!-- Modules -->
+      <div class="card">
+        <div class="icon">📦</div>
+        <div class="title">Modules</div>
+        <div class="badge">Core</div>
+        <div class="description">
+          Organize related components and dependencies. Modules group related functionality and manage dependencies.
+        </div>
+        <div class="example">
+          <code>@Module({</code><br>
+          <code>  controllers: [UsersController],</code><br>
+          <code>  providers: [UsersService]</code><br>
+          <code>})</code>
+        </div>
+        <div class="tip">
+          Modules are the basic building blocks of NestJS applications and help organize code into logical units
+        </div>
+      </div>
 
-    <div class="card">
-      <div class="title">4. Pipes</div>
-      <p>Transform and validate input data.</p>
-      <div class="example">@Body(new ValidationPipe()) dto: CreateUserDto</div>
-    </div>
+      <!-- Decorators -->
+      <div class="card">
+        <div class="icon">🏷️</div>
+        <div class="title">Decorators</div>
+        <div class="badge">Core</div>
+        <div class="description">
+          Add metadata and behavior to classes and methods. Decorators are used to modify or enhance classes and methods.
+        </div>
+        <div class="example">
+          <code>@Controller()</code><br>
+          <code>@Get()</code><br>
+          <code>@Post()</code><br>
+          <code>@Injectable()</code>
+        </div>
+        <div class="note">
+          Decorators are a key feature of TypeScript that NestJS heavily relies on for its functionality
+        </div>
+      </div>
 
-    <div class="card">
-      <div class="title">5. Guards</div>
-      <p>Control request access (e.g., authentication).</p>
-      <div class="example">@UseGuards(AuthGuard)</div>
-    </div>
+      <!-- Middleware -->
+      <div class="card">
+        <div class="icon">🛡️</div>
+        <div class="title">Middleware</div>
+        <div class="badge">HTTP</div>
+        <div class="description">
+          Process requests before they reach route handlers. Similar to Express middleware, but with NestJS features.
+        </div>
+        <div class="example">
+          <code>app.use(loggerMiddleware);</code><br>
+          <code>app.use('/api', authMiddleware);</code>
+        </div>
+        <div class="tip">
+          Middleware can be used to log requests, authenticate users, or modify request/response objects
+        </div>
+      </div>
 
-    <div class="card">
-      <div class="title">6. Filters</div>
-      <p>Catch and handle exceptions.</p>
-      <div class="example">@UseFilters(HttpExceptionFilter)</div>
-    </div>
+      <!-- Interceptors -->
+      <div class="card">
+        <div class="icon">🔄</div>
+        <div class="title">Interceptors</div>
+        <div class="badge">HTTP</div>
+        <div class="description">
+          Process requests and responses. Interceptors can modify incoming requests or outgoing responses.
+        </div>
+        <div class="example">
+          <code>@UseInterceptors(LoggingInterceptor)</code><br>
+          <code>@UseInterceptors(TransformInterceptor)</code>
+        </div>
+        <div class="note">
+          Interceptors are more powerful than middleware as they have access to both request and response objects
+        </div>
+      </div>
 
-    <div class="card">
-      <div class="title">7. Lifecycle Hooks</div>
-      <p>Methods called at specific times during the app's lifetime.</p>
-      <div class="example">onModuleInit() { ... }</div>
+      <!-- Pipes -->
+      <div class="card">
+        <div class="icon">🔄</div>
+        <div class="title">Pipes</div>
+        <div class="badge">Validation</div>
+        <div class="description">
+          Transform and validate input data. Pipes ensure that incoming data conforms to expected formats.
+        </div>
+        <div class="example">
+          <code>@Body(new ValidationPipe()) dto: CreateUserDto</code>
+        </div>
+        <div class="tip">
+          Pipes are great for data validation and transformation before it reaches your business logic
+        </div>
+      </div>
+
+      <!-- Guards -->
+      <div class="card">
+        <div class="icon">🔒</div>
+        <div class="title">Guards</div>
+        <div class="badge">Security</div>
+        <div class="description">
+          Control access to routes and methods. Guards implement the authorization logic in your application.
+        </div>
+        <div class="example">
+          <code>@UseGuards(AuthGuard)</code><br>
+          <code>@UseGuards(RolesGuard)</code>
+        </div>
+        <div class="note">
+          Guards are used to protect routes and methods based on user roles or permissions
+        </div>
+      </div>
+
+      <!-- Exception Filters -->
+      <div class="card">
+        <div class="icon">🚨</div>
+        <div class="title">Exception Filters</div>
+        <div class="badge">Error Handling</div>
+        <div class="description">
+          Handle exceptions globally. Exception filters catch and process errors that occur during request processing.
+        </div>
+        <div class="example">
+          <code>@Catch(HttpException)</code><br>
+          <code>handleException(exception: HttpException) {}</code>
+        </div>
+        <div class="tip">
+          Exception filters help maintain consistent error handling across your application
+        </div>
+      </div>
+
+      <!-- Events -->
+      <div class="card">
+        <div class="icon">⚡</div>
+        <div class="title">Events</div>
+        <div class="badge">Async</div>
+        <div class="description">
+          Handle events and notifications. Events allow components to communicate asynchronously.
+        </div>
+        <div class="example">
+          <code>@EventEmitter()</code><br>
+          <code>emit('user.created', user)</code><br>
+          <code>@OnEvent('user.created')</code>
+        </div>
+        <div class="note">
+          Events are great for implementing publish-subscribe patterns in your application
+        </div>
+      </div>
     </div>
   </body>
 </html>
