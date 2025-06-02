@@ -9,23 +9,29 @@
     </style>
   </head>
   <body>
-    <h1 class="text-4xl font-bold text-center text-blue-600 mb-8 bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">NestJS Cheatsheet</h1>
+    <h1 class="text-4xl font-bold text-center text-blue-600 my-8 bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">NestJS Cheatsheet</h1>
 
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Controllers -->
       <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
-        <div class="text-4xl text-blue-600 mb-4">🛠️</div>
-        <div class="text-blue-600 font-semibold text-xl mb-2">Controllers</div>
-        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Core</div>
+        <div class="flex items-center justify-start gap-4 mb-4">
+          <div class="text-4xl text-blue-600">🛠️</div>
+          <div class="text-blue-600 font-semibold text-2xl">Controllers</div>
+          <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm inline-block">Core</div>
+        </div>
         <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Handle incoming requests and return responses. Controllers are the main entry point for handling HTTP requests.
         </div>
-        <pre class="whitespace-pre-line">
-          @Controller('users')
-          @Get()
-          findAll(): Promise<User[]> {}
-          @Post()
-          create(@Body() user: UserDto): Promise<User> {}
+        <pre class="bg-gray-100 p-4 rounded text-sm font-mono whitespace-pre">
+@Controller('users')
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
+
+  @Get()
+  async findAll() {
+    return this.usersService.findAll();
+  }
+}
         </pre>
         <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
           <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
@@ -35,17 +41,19 @@
 
       <!-- Services -->
       <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
-        <div class="text-4xl text-blue-600 mb-4">⚙️</div>
-        <div class="text-blue-600 font-semibold text-xl mb-2">Services</div>
-        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Core</div>
+        <div class="flex items-center justify-start gap-4 mb-4">
+          <div class="text-4xl text-blue-600">⚙️</div>
+          <div class="text-blue-600 font-semibold text-2xl">Services</div>
+          <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm inline-block">Core</div>
+        </div>
         <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Handle business logic and data operations. Services are injectable classes that provide specific functionality.
         </div>
-        <pre class="whitespace-pre-line">
-          @Injectable()
-          export class UsersService {
-            findAll(): Promise<User[]> {}
-          }
+        <pre class="bg-gray-100 p-4 rounded text-sm font-mono whitespace-pre">
+@Injectable()
+export class UsersService {
+  findAll(): Promise<User[]> {}
+}
         </pre>
         <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
           <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
@@ -55,17 +63,19 @@
 
       <!-- Modules -->
       <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
-        <div class="text-4xl text-blue-600 mb-4">📦</div>
-        <div class="text-blue-600 font-semibold text-xl mb-2">Modules</div>
-        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Core</div>
+        <div class="flex items-center justify-start gap-4 mb-4">
+          <div class="text-4xl text-blue-600">📦</div>
+          <div class="text-blue-600 font-semibold text-2xl">Modules</div>
+          <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm inline-block">Core</div>
+        </div>
         <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Organize related components and dependencies. Modules group related functionality and manage dependencies.
         </div>
-        <pre class="whitespace-pre-line">
-          @Module({
-            controllers: [UsersController],
-            providers: [UsersService]
-          })
+        <pre class="bg-gray-100 p-4 rounded text-sm font-mono whitespace-pre">
+@Module({
+  controllers: [UsersController],
+  providers: [UsersService]
+})
         </pre>
         <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
           <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
@@ -75,17 +85,20 @@
 
       <!-- Decorators -->
       <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
-        <div class="text-4xl text-blue-600 mb-4">🏷️</div>
-        <div class="text-blue-600 font-semibold text-xl mb-2">Decorators</div>
-        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Core</div>
+        <div class="flex items-center justify-start gap-4 mb-4">
+          <div class="text-4xl text-blue-600">🏷️</div>
+          <div class="text-blue-600 font-semibold text-2xl">Decorators</div>
+          <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm inline-block">Core</div>
+        </div>
         <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Add metadata and behavior to classes and methods. Decorators are used to modify or enhance classes and methods.
         </div>
-        <pre class="whitespace-pre-line">
-          @Controller()
-          @Get()
-          @Post()
-          @Injectable()
+        <pre class="bg-gray-100 p-4 rounded text-sm font-mono whitespace-pre">
+@Controller()
+@Get()
+@Post()
+@Injectable()
+@Serialize(GetUserDto)
         </pre>
         <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
           <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
@@ -95,15 +108,16 @@
 
       <!-- Middleware -->
       <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
-        <div class="text-4xl text-blue-600 mb-4">🛡️</div>
-        <div class="text-blue-600 font-semibold text-xl mb-2">Middleware</div>
-        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">HTTP</div>
+        <div class="flex items-center justify-start gap-4 mb-4">
+          <div class="text-4xl text-blue-600">📝</div>
+          <div class="text-blue-600 font-semibold text-2xl">Middleware</div>
+          <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm inline-block">HTTP</div>
+        </div>
         <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Process requests before they reach route handlers. Similar to Express middleware, but with NestJS features.
         </div>
-        <pre class="whitespace-pre-line">
-          app.use(loggerMiddleware);
-          app.use('/api', authMiddleware);
+        <pre class="bg-gray-100 p-4 rounded text-sm font-mono whitespace-pre">
+app.use(loggerMiddleware);
         </pre>
         <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
           <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
@@ -113,15 +127,17 @@
 
       <!-- Interceptors -->
       <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
-        <div class="text-4xl text-blue-600 mb-4">🔄</div>
-        <div class="text-blue-600 font-semibold text-xl mb-2">Interceptors</div>
-        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">HTTP</div>
+        <div class="flex items-center justify-start gap-4 mb-4">
+          <div class="text-4xl text-blue-600">🔄</div>
+          <div class="text-blue-600 font-semibold text-2xl">Interceptors</div>
+          <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm inline-block">HTTP</div>
+        </div>
         <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Process requests and responses. Interceptors can modify incoming requests or outgoing responses.
         </div>
-        <pre class="whitespace-pre-line">
-          @UseInterceptors(LoggingInterceptor)
-          @UseInterceptors(TransformInterceptor)
+        <pre class="bg-gray-100 p-4 rounded text-sm font-mono whitespace-pre">
+@UseInterceptors(LoggingInterceptor)
+@UseInterceptors(SerializeInterceptor)
         </pre>
         <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
           <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
@@ -131,14 +147,16 @@
 
       <!-- Pipes -->
       <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
-        <div class="text-4xl text-blue-600 mb-4">🔄</div>
-        <div class="text-blue-600 font-semibold text-xl mb-2">Pipes</div>
-        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Validation</div>
+        <div class="flex items-center justify-start gap-4 mb-4">
+          <div class="text-4xl text-blue-600">🔄</div>
+          <div class="text-blue-600 font-semibold text-2xl">Pipes</div>
+          <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm inline-block">Validation</div>
+        </div>
         <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Transform and validate input data. Pipes ensure that incoming data conforms to expected formats.
         </div>
-        <pre class="whitespace-pre-line">
-          @Body(new ValidationPipe()) dto: CreateUserDto
+        <pre class="bg-gray-100 p-4 rounded text-sm font-mono whitespace-pre">
+app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
         </pre>
         <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
           <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
@@ -148,15 +166,17 @@
 
       <!-- Guards -->
       <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
-        <div class="text-4xl text-blue-600 mb-4">🔒</div>
-        <div class="text-blue-600 font-semibold text-xl mb-2">Guards</div>
-        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Security</div>
+        <div class="flex items-center justify-start gap-4 mb-4">
+          <div class="text-4xl text-blue-600">🔒</div>
+          <div class="text-blue-600 font-semibold text-2xl">Guards</div>
+          <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm inline-block">Security</div>
+        </div>
         <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Control access to routes and methods. Guards implement the authorization logic in your application.
         </div>
-        <pre class="whitespace-pre-line">
-          @UseGuards(AuthGuard)
-          @UseGuards(RolesGuard)
+        <pre class="bg-gray-100 p-4 rounded text-sm font-mono whitespace-pre">
+@UseGuards(AuthGuard)
+@UseGuards(RolesGuard)
         </pre>
         <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
           <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
@@ -166,15 +186,17 @@
 
       <!-- Exception Filters -->
       <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
-        <div class="text-4xl text-blue-600 mb-4">❌</div>
-        <div class="text-blue-600 font-semibold text-xl mb-2">Exception Filters</div>
-        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Error Handling</div>
+        <div class="flex items-center justify-start gap-4 mb-4">
+          <div class="text-4xl text-red-600">❌</div>
+          <div class="text-blue-600 font-semibold text-2xl">Exception Filters</div>
+          <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm inline-block">Error Handling</div>
+        </div>
         <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Handle exceptions globally. Exception filters catch and process errors that occur during request processing.
         </div>
-        <pre class="whitespace-pre-line">
-          @Catch(HttpException)
-          handleException(exception: HttpException) {}
+        <pre class="bg-gray-100 p-4 rounded text-sm font-mono whitespace-pre">
+@Catch(HttpException)
+handleException(exception: HttpException) {}
         </pre>
         <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
           <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
@@ -184,15 +206,17 @@
 
       <!-- Events -->
       <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
-        <div class="text-4xl text-blue-600 mb-4">⚡</div>
-        <div class="text-blue-600 font-semibold text-xl mb-2">Events</div>
-        <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm mb-4 inline-block">Async</div>
+        <div class="flex items-center justify-start gap-4 mb-4">
+          <div class="text-4xl text-blue-600">⚡</div>
+          <div class="text-blue-600 font-semibold text-2xl">Events</div>
+          <div class="bg-blue-600 text-white px-2 py-1 rounded-full text-sm inline-block">Async</div>
+        </div>
         <div class="text-gray-600 mb-4 pl-2 border-l-2 border-gray-200 bg-gray-50 rounded-r-lg p-2">
           Handle events and notifications. Events allow components to communicate asynchronously.
         </div>
-        <pre class="whitespace-pre-line">
-          @EventEmitter()
-          emit('user.created', user)
+        <pre class="bg-gray-100 p-4 rounded text-sm font-mono whitespace-pre">
+@EventEmitter()
+emit('user.created', user)
         </pre>
         <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
           <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
