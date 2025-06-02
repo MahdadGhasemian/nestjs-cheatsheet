@@ -8,12 +8,13 @@
       @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap');
     </style>
   </head>
-  <body>
-    <h1 class="text-4xl font-bold text-center text-blue-600 my-8 bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">NestJS Cheatsheet</h1>
+  <body class="p-8">
+    <h1 class="text-4xl font-bold text-center text-blue-600 mb-8 bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">NestJS Cheatsheet</h1>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-3 gap-6 justify-center items-scretch">
       <!-- Controllers -->
-      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow border flex flex-col justify-between">
+        <div class="flex-grow">
         <div class="flex items-center justify-start gap-4 mb-4">
           <div class="text-4xl text-blue-600">🛠️</div>
           <div class="text-blue-600 font-semibold text-2xl">Controllers</div>
@@ -25,7 +26,6 @@
         <pre class="bg-gray-100 p-4 rounded text-sm font-mono whitespace-pre">
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
 
   @Get()
   async findAll() {
@@ -33,6 +33,7 @@ export class UsersController {
   }
 }
         </pre>
+      </div>
         <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
           <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
           Controllers must be decorated with <code class="text-blue-600">@Controller()</code> and can use route decorators like <code class="text-blue-600">@Get()</code>, <code class="text-blue-600">@Post()</code>
@@ -40,7 +41,8 @@ export class UsersController {
       </div>
 
       <!-- Services -->
-      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow border flex flex-col justify-between">
+        <div class="flex-grow">
         <div class="flex items-center justify-start gap-4 mb-4">
           <div class="text-4xl text-blue-600">⚙️</div>
           <div class="text-blue-600 font-semibold text-2xl">Services</div>
@@ -55,6 +57,7 @@ export class UsersService {
   findAll(): Promise<User[]> {}
 }
         </pre>
+        </div>
         <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
           <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
           Services must be decorated with <code class="text-red-600">@Injectable()</code> to be injectable into other classes
@@ -62,7 +65,8 @@ export class UsersService {
       </div>
 
       <!-- Modules -->
-      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow border flex flex-col justify-between">
+        <div class="flex-grow">
         <div class="flex items-center justify-start gap-4 mb-4">
           <div class="text-4xl text-blue-600">📦</div>
           <div class="text-blue-600 font-semibold text-2xl">Modules</div>
@@ -77,14 +81,18 @@ export class UsersService {
   providers: [UsersService]
 })
         </pre>
+        </div>
         <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
           <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
           Modules are the basic building blocks of NestJS applications and help organize code into logical units
         </div>
       </div>
+    </div>
 
+    <div class="grid grid-cols-3 gap-6 justify-center items-stretch mt-12">
       <!-- Decorators -->
-      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow border flex flex-col justify-between">
+        <div class="flex-grow">
         <div class="flex items-center justify-start gap-4 mb-4">
           <div class="text-4xl text-blue-600">🏷️</div>
           <div class="text-blue-600 font-semibold text-2xl">Decorators</div>
@@ -100,6 +108,7 @@ export class UsersService {
 @Injectable()
 @Serialize(GetUserDto)
         </pre>
+      </div>
         <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
           <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
           Decorators are a key feature of TypeScript that NestJS heavily relies on for its functionality
@@ -107,7 +116,8 @@ export class UsersService {
       </div>
 
       <!-- Middleware -->
-      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow border flex flex-col justify-between">
+        <div class="flex-grow">
         <div class="flex items-center justify-start gap-4 mb-4">
           <div class="text-4xl text-blue-600">📝</div>
           <div class="text-blue-600 font-semibold text-2xl">Middleware</div>
@@ -119,6 +129,7 @@ export class UsersService {
         <pre class="bg-gray-100 p-4 rounded text-sm font-mono whitespace-pre">
 app.use(loggerMiddleware);
         </pre>
+      </div>
         <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
           <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
           Middleware can be used to log requests, authenticate users, or modify request/response objects
@@ -126,7 +137,8 @@ app.use(loggerMiddleware);
       </div>
 
       <!-- Interceptors -->
-      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow border flex flex-col justify-between">
+        <div class="flex-grow">
         <div class="flex items-center justify-start gap-4 mb-4">
           <div class="text-4xl text-blue-600">🔄</div>
           <div class="text-blue-600 font-semibold text-2xl">Interceptors</div>
@@ -139,6 +151,7 @@ app.use(loggerMiddleware);
 @UseInterceptors(LoggingInterceptor)
 @UseInterceptors(SerializeInterceptor)
         </pre>
+      </div>
         <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
           <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
           Interceptors are more powerful than middleware as they have access to both request and response objects
@@ -146,7 +159,8 @@ app.use(loggerMiddleware);
       </div>
 
       <!-- Pipes -->
-      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow border flex flex-col justify-between">
+        <div class="flex-grow">
         <div class="flex items-center justify-start gap-4 mb-4">
           <div class="text-4xl text-blue-600">🔄</div>
           <div class="text-blue-600 font-semibold text-2xl">Pipes</div>
@@ -156,8 +170,9 @@ app.use(loggerMiddleware);
           Transform and validate input data. Pipes ensure that incoming data conforms to expected formats.
         </div>
         <pre class="bg-gray-100 p-4 rounded text-sm font-mono whitespace-pre">
-app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+app.useGlobalPipes(new ValidationPipe());
         </pre>
+      </div>
         <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
           <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
           Pipes are great for data validation and transformation before it reaches your business logic
@@ -165,7 +180,8 @@ app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
       </div>
 
       <!-- Guards -->
-      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow border flex flex-col justify-between">
+        <div class="flex-grow">
         <div class="flex items-center justify-start gap-4 mb-4">
           <div class="text-4xl text-blue-600">🔒</div>
           <div class="text-blue-600 font-semibold text-2xl">Guards</div>
@@ -178,6 +194,7 @@ app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 @UseGuards(AuthGuard)
 @UseGuards(RolesGuard)
         </pre>
+      </div>
         <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
           <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
           Guards are used to protect routes and methods based on user roles or permissions
@@ -185,7 +202,8 @@ app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
       </div>
 
       <!-- Exception Filters -->
-      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow border flex flex-col justify-between">
+        <div class="flex-grow">
         <div class="flex items-center justify-start gap-4 mb-4">
           <div class="text-4xl text-red-600">❌</div>
           <div class="text-blue-600 font-semibold text-2xl">Exception Filters</div>
@@ -198,6 +216,7 @@ app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 @Catch(HttpException)
 handleException(exception: HttpException) {}
         </pre>
+      </div>
         <div class="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg mt-4">
           <div class="text-blue-600 font-medium mb-2">💡 Tip</div>
           Exception filters help maintain consistent error handling across your application
@@ -205,7 +224,8 @@ handleException(exception: HttpException) {}
       </div>
 
       <!-- Events -->
-      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow">
+      <div class="bg-white rounded-xl shadow-md p-6 mb-6 hover:shadow-lg transition-shadow border flex flex-col justify-between">
+        <div class="flex-grow">
         <div class="flex items-center justify-start gap-4 mb-4">
           <div class="text-4xl text-blue-600">⚡</div>
           <div class="text-blue-600 font-semibold text-2xl">Events</div>
@@ -218,6 +238,7 @@ handleException(exception: HttpException) {}
 @EventEmitter()
 emit('user.created', user)
         </pre>
+      </div>
         <div class="bg-red-50 border-l-4 border-red-600 p-4 rounded-r-lg mt-4">
           <div class="text-red-600 font-medium mb-2">⚠️ Note</div>
           Events are great for implementing publish-subscribe patterns in your application
